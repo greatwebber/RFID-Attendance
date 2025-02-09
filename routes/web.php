@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LecturerController;
+use App\Http\Controllers\Admin\RfidController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DepartmentController;
@@ -47,5 +48,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::resource('admin/students', StudentController::class);
     Route::get('admin/students/{id}/generate-rfid', [StudentController::class, 'generateRFID'])->name('students.generate-rfid');
     Route::get('admin/students/{id}/print-rfid', [StudentController::class, 'printRFID'])->name('students.print-rfid');
+
+    Route::resource('admin/rfid', RfidController::class);
 
 });

@@ -14,6 +14,7 @@
             <th>Course Name</th>
             <th>Course Code</th>
             <th>Department</th>
+            <th>Level</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td>{{ $course->course_name }}</td>
                 <td>{{ $course->course_code }}</td>
                 <td>{{ $course->department->name }}</td>
+                <td>{{ $course->level }}</td>
                 <td>
                     <a href="{{ route('courses.edit', $course->id) }}" class="btn btn-sm btn-warning">Edit</a>
                     <form action="{{ route('courses.destroy', $course->id) }}" method="POST" style="display:inline;">

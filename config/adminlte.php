@@ -352,15 +352,20 @@ return [
         // RFID Card Management
         ['header' => 'RFID MANAGEMENT'],
         [
-            'text' => 'Generate RFID Cards',
-            'url'  => 'admin/rfid/generate',
-            'icon' => 'fas fa-fw fa-credit-card',
+            'text' => 'RFID Management',
+            'icon' => 'fas fa-id-card',
+            'submenu' => [
+                [
+                    'text' => 'Manage RFID Cards',
+                    'url' => 'admin/rfid',
+                ],
+                [
+                    'text' => 'Assign New RFID',
+                    'url' => 'admin/rfid/create',
+                ],
+            ],
         ],
-        [
-            'text' => 'Print RFID Cards',
-            'url'  => 'admin/rfid/print',
-            'icon' => 'fas fa-fw fa-print',
-        ],
+
 
         // Fees & Payments
         ['header' => 'FEES & PAYMENTS'],

@@ -27,6 +27,7 @@ class CourseController extends Controller
             'course_name' => 'required|string',
             'course_code' => 'required|string|unique:courses',
             'department_id' => 'required|exists:departments,id',
+            'level' => 'required|in:ND1,ND2,HND1,HND2',
         ]);
 
         Course::create($request->all());
@@ -46,6 +47,7 @@ class CourseController extends Controller
             'course_name' => 'required|string',
             'course_code' => 'required|string|unique:courses,course_code,' . $course->id,
             'department_id' => 'required|exists:departments,id',
+            'level' => 'required|in:ND1,ND2,HND1,HND2',
         ]);
 
         $course->update($request->all());

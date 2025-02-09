@@ -28,6 +28,16 @@
             </select>
         </div>
 
+        <div class="form-group">
+            <label for="level">Course Level</label>
+            <select name="level" class="form-control" required>
+                <option value="ND1">ND1</option>
+                <option value="ND2">ND2</option>
+                <option value="HND1">HND1</option>
+                <option value="HND2">HND2</option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary">Save Course</button>
         <a href="{{ route('courses.index') }}" class="btn btn-secondary">Back</a>
     </form>

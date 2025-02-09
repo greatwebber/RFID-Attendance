@@ -24,5 +24,11 @@ class Student extends Model
     {
         return $this->belongsTo(Department::class);
     }
+
+    public function rfid()
+    {
+        return $this->hasOne(RfidCard::class);
+    }
+
 }
 

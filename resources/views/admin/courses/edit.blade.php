@@ -31,6 +31,16 @@
             </select>
         </div>
 
+        <div class="form-group">
+            <label for="level">Course Level</label>
+            <select name="level" class="form-control" required>
+                <option value="ND1" {{ $course->level == 'ND1' ? 'selected' : '' }}>ND1</option>
+                <option value="ND2" {{ $course->level == 'ND2' ? 'selected' : '' }}>ND2</option>
+                <option value="HND1" {{ $course->level == 'HND1' ? 'selected' : '' }}>HND1</option>
+                <option value="HND2" {{ $course->level == 'HND2' ? 'selected' : '' }}>HND2</option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary">Update Course</button>
         <a href="{{ route('courses.index') }}" class="btn btn-secondary">Back</a>
     </form>
