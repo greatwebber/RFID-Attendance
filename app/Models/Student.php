@@ -30,5 +30,11 @@ class Student extends Model
         return $this->hasOne(RfidCard::class);
     }
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_student')->withTimestamps();
+    }
+
+
 }
 

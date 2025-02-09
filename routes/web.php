@@ -63,6 +63,8 @@ Route::prefix('lecturer')->name('lecturer.')->group(function () {
 
     Route::middleware('auth:lecturer')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/my-courses', [\App\Http\Controllers\Lecturer\CourseController::class, 'index'])->name('courses');
+        Route::get('/courses/{course}/students', [\App\Http\Controllers\Lecturer\CourseController::class, 'viewStudents'])->name('courses.students');
 
         Route::post('/logout', [LecturerAuthController::class, 'logout'])->name('logout');
     });
