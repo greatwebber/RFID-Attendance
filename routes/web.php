@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\Lecturer\DashboardController;
+use App\Http\Controllers\LecturerAuthController;
 use App\Http\Controllers\LecturerCourseController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -51,4 +53,17 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::resource('admin/rfid', RfidController::class);
 
+});
+
+
+
+Route::prefix('lecturer')->name('lecturer.')->group(function () {
+    Route::get('/login', [LecturerAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LecturerAuthController::class, 'login']);
+
+    Route::middleware('auth:lecturer')->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::post('/logout', [LecturerAuthController::class, 'logout'])->name('logout');
+    });
 });
