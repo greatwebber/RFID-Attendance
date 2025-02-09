@@ -9,6 +9,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Department</th>
+            <th>Assigned Courses</th> <!-- New Column -->
             <th>Actions</th>
         </tr>
         </thead>
@@ -19,8 +20,15 @@
                 <td>{{ $lecturer->email }}</td>
                 <td>{{ $lecturer->department->name }}</td>
                 <td>
+                    @foreach($lecturer->courses as $course)
+                        <span class="badge badge-info">{{ $course->course_code }}</span>
+                    @endforeach
+                </td>
+                <td>
                     <a href="{{ route('lecturers.edit', $lecturer) }}" class="btn btn-warning">Edit</a>
-                    <a href="{{ route('lecturers.assignCourses', $lecturer) }}" class="btn btn-info">Assign Courses</a>
+                    <a href="{{ route('lecturers.assignCourses', $lecturer->id) }}" class="btn btn-sm btn-success">
+                        Assign Courses
+                    </a>
                     <form action="{{ route('lecturers.destroy', $lecturer) }}" method="POST" style="display:inline;">
                         @csrf @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>

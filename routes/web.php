@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\LecturerCourseController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,8 +37,11 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::resource('admin/courses', CourseController::class);
 
     // Assign Courses to Lecturers
-    Route::get('admin/lecturers/{lecturer}/assign-courses', [LecturerController::class, 'assignCourses'])->name('lecturers.assignCourses');
-    Route::post('admin/lecturers/{lecturer}/assign-courses', [LecturerController::class, 'storeAssignedCourses'])->name('lecturers.storeAssignedCourses');
+    Route::get('admin/lecturers/{lecturer}/assign-courses', [LecturerCourseController::class, 'assignCourses'])
+        ->name('lecturers.assignCourses');
+
+    Route::post('admin/lecturers/{lecturer}/assign-courses', [LecturerCourseController::class, 'storeAssignedCourses'])
+        ->name('lecturers.assignCourses.store');
 
 
     Route::resource('admin/students', StudentController::class);
