@@ -53,6 +53,23 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-list"></i>
+                            <p>Attendance Records</p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @foreach(Auth::guard('lecturer')->user()->courses as $course)
+                                <li class="nav-item">
+                                    <a href="{{ route('lecturer.attendance.view', $course->id) }}" class="nav-link">
+                                        <i class="fas fa-chevron-right"></i> {{ $course->course_code }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+
+
 
                     <li class="nav-item">
                         <a href="#" class="nav-link">

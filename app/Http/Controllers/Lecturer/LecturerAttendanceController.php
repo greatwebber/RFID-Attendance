@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Lecturer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attendance;
 use App\Models\AttendanceSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,50 @@ class LecturerAttendanceController extends Controller
 
         return view('lecturer.attendance.index', compact('sessions'));
     }
+
+    public function viewAttendance(Request $request, $course_id)
+    {
+        $lecturer = Auth::guard('lecturer')->user();
+
+        // Ensure the lecturer is assigned to this course
+        $course = $lecturer->courses()->where('courses.id', $course_id)->first();
+        if (!$course) {
+            abort(403, 'Unauthorized access');
+        }
+
+        // Fetch attendance records with filters
+        $query = Attendance::whereHas('session', function ($q) use ($course_id) {
+            $q->where('course_id', $course_id);
+        })->with(['student', 'session']);
+
+        // Apply date filter
+        if ($request->has('date') && !empty($request->date)) {
+            $query->whereHas('session', function ($q) use ($request) {
+                $q->whereDate('session_time', $request->date);
+            });
+        }
+
+        // Apply level filter (ND1, ND2, HND1, HND2)
+        if ($request->has('level') && !empty($request->level)) {
+            $query->whereHas('student', function ($q) use ($request) {
+                $q->where('level', $request->level);
+            });
+        }
+
+        // Apply student name filter
+        if ($request->has('student_name') && !empty($request->student_name)) {
+            $query->whereHas('student', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->student_name . '%');
+            });
+        }
+
+        $attendanceRecords = $query->get();
+
+        return view('lecturer.attendance.record', compact('course', 'attendanceRecords'));
+    }
+
+
+
 
     public function edit(AttendanceSession $session)
     {

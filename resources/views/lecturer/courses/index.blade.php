@@ -30,6 +30,10 @@
                                            <a href="{{ route('lecturer.courses.students', $course->id) }}" class="btn btn-sm btn-info">
                                                View Students
                                            </a>
+
+                                           <a href="{{ route('lecturer.attendance.view', $course->id) }}" class="btn btn-warning btn-sm">
+                                               View Attendance
+                                           </a>
                                        </td>
                                    </tr>
 

@@ -74,6 +74,9 @@ Route::prefix('lecturer')->name('lecturer.')->group(function () {
         Route::post('/attendance/{session}/update', [LecturerAttendanceController::class, 'update'])->name('attendance.update');
         Route::delete('/attendance/{session}/delete', [LecturerAttendanceController::class, 'destroy'])->name('attendance.destroy');
 
+        Route::get('/attendance/{course_id}', [LecturerAttendanceController::class, 'viewAttendance'])
+            ->name('attendance.view');
+
 
         Route::post('/logout', [LecturerAuthController::class, 'logout'])->name('logout');
     });
