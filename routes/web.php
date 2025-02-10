@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\Lecturer\DashboardController;
+use App\Http\Controllers\Lecturer\LecturerAttendanceController;
 use App\Http\Controllers\LecturerAuthController;
 use App\Http\Controllers\LecturerCourseController;
 use App\Http\Controllers\StudentController;
@@ -65,6 +66,14 @@ Route::prefix('lecturer')->name('lecturer.')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/my-courses', [\App\Http\Controllers\Lecturer\CourseController::class, 'index'])->name('courses');
         Route::get('/courses/{course}/students', [\App\Http\Controllers\Lecturer\CourseController::class, 'viewStudents'])->name('courses.students');
+
+        Route::get('/attendance/create', [LecturerAttendanceController::class, 'create'])->name('attendance.create');
+        Route::post('/attendance/store', [LecturerAttendanceController::class, 'store'])->name('attendance.store');
+        Route::get('/attendance', [LecturerAttendanceController::class, 'index'])->name('attendance.index');
+        Route::get('/attendance/{session}/edit', [LecturerAttendanceController::class, 'edit'])->name('attendance.edit');
+        Route::post('/attendance/{session}/update', [LecturerAttendanceController::class, 'update'])->name('attendance.update');
+        Route::delete('/attendance/{session}/delete', [LecturerAttendanceController::class, 'destroy'])->name('attendance.destroy');
+
 
         Route::post('/logout', [LecturerAuthController::class, 'logout'])->name('logout');
     });
